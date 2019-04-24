@@ -51,20 +51,53 @@ docker container run -d -p 3306:3306 --name mysql --env MYSQL_ROOT_PASSWORD=1234
 
 docker container stop name
 	to stop the container running
+
+
 docker container run -d -p 8080:80 -v $(pwd):/usr/share/nginx/html --name nginx-website nginx
-	to set the publish container file bind mount
+	to set the publish container file bind mount(map the container nginx files to local dir)
 	to create a new nginx object called nginx-website and run with nginx image, and map
 	current working directory to the os's /usr/share/nginx/html
 	the current working directory is called bind mount
+
+	if about.html is created in this local dir, enter the browser to localhost:8080/about.html
+	and we can see about page
 	
 
 docker container exec -it mynginx bash
 	you can bash into a contianer
 	nginx is based on Debian system, it will run Debian command
-	cd usr/share/nginx/html, in Debian the html files locate in here
+	within the container: cd usr/share/nginx/html, in Debian the html files locate in here
+	we can change the html files in here
 
 exit
 	to exit container
+
+docker login
+	to login docker with username and password
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Create a image file:
+	create a image command called Dockerfile
+	FROM nginx:latest
+    WORKDIR /usr/share/nginx/html
+    COPY . .    # copy everything to image
+
+    docker image build -t falconperegrine/nginx-website .
+
+Create container from image:
+	docker container run -d -p 8082:80 falconperegrime/nginx-website
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+version:
+docker-ce_18.06.3_ce_3-0_ubuntu_amd64.deb 
+	used the this version later comes into error
+
+
+
+
 
 
 
