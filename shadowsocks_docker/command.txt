@@ -1,3 +1,10 @@
+"""
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+yum -y install git
+"""
+	安裝docker和git（如未安裝）
+
 git clone https://github.com/etaf/shadowsocks-docker.git && cd shadowsocks-docker
 	在github下載Dockerfile和相關設置
 
