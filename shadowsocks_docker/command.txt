@@ -1,0 +1,31 @@
+git clone https://github.com/etaf/shadowsocks-docker.git && cd shadowsocks-docker
+	在github下載Dockerfile和相關設置
+
+cat shadowsocks_config.json
+	查看設置，有需要就修改
+
+{
+    "server":"::",
+    "server_port": 8838,
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "password":"abcdefg",
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open":true
+}
+
+systemctl stop firewalld
+	用各種方式停止防火墻和開啟端口，這裡只使用firewalld
+
+docker build -t etaf/shadowsocks ./
+	把你的設置和原來的image一起構建成docker image
+
+sudo service docker restart
+	重啟docker
+
+sudo docker run --restart=always -d -p 8838:8838 etaf/shadowsocks
+	運行Container和開機自啟動
+
+docker logs $(docker ps -ql)
+	查看Contianer裡的輸出

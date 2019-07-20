@@ -1,5 +1,5 @@
-FROM nginx:latest
+FROM alpine
 
-WORKDIR /usr/share/nginx/html
+COPY script.sh /script.sh
 
-COPY . .
+CMD ["/script.sh"]

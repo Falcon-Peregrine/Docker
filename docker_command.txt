@@ -1,0 +1,109 @@
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+	安裝Docker
+
+docker pull [image name]
+	下載鏡像（image name:latest）
+
+docker pull ubuntu
+
+docker run --name Myubuntu1 -it ubuntu bash
+	在Container中運行ubuntu，進入bash，並使用interative mode
+
+docker run -it --name [tag] -p 1234:80 -v $PWD/.:/home/test [name]
+    Interactively地去運行一個Container，端口指定
+
+docker run -d -it --name [container name] -p 192.168.2.1:80:80 [image name]
+
+docker start [name]
+	運行Container
+
+docker attach [name]
+	進入Container
+
+docker help
+	一般性幫助
+docker [command] --help
+	尋求幫助
+
+docker images
+	查看所有鏡像
+
+
+docker ps -a
+	列出所有Container
+
+docker attach [name]
+	重新进入该Container
+
+top -b
+	查看正在運行的進程
+
+ctl+p & ctl+q
+	退出Container，進程繼續
+
+exit
+	退出Container，進程結束
+
+docker exec -it [name] [command]
+	在Container裡執行命令Without結束其他進程
+
+docker stop [name]
+	結束Container
+
+docker rm [name]
+	刪除Container
+
+docker rmi [name]
+	刪除鏡像
+
+docker inspect [name] | grep [content]
+	在鏡像信息裡查找需要的Content
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+docker build [path]
+docker build .
+	建立鏡像
+
+docker tag 40d13af0eebd [image name]
+	命名鏡像
+
+sudo yum remove docker \
+                docker-client \
+                docker-client-latest \
+                docker-common \
+                docker-latest \
+                docker-latest-logrotate \
+                docker-logrotate \
+                docker-selinux \
+                docker-engine-selinux \
+                docker-engine
+    卸載Docker
+
+docker -v
+	查看版本
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Dockerfile的用法
+
+
+From [image name]
+
+MAINTAINER admin@v2rayz.com
+
+RUN yum -y install httpd
+
+COPY index.html /var/www/html
+
+EXPOSE 80 443 8080/tcp 5000/udp
+
+CMD ["bash", "/script.sh"]
+
+以上命令都幹了什麼事情：
+從dockerhub載入image
+註明作者
+運行命令
+從本地copy一個文件到Contianer的路徑
+打開80 443 8080的tcp端口和5000端口
+執行bash /script.sh

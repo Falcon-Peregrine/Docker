@@ -86,7 +86,7 @@ Create a image file:
     docker image build -t falconperegrine/nginx-website .
 
 Create container from image:
-	docker container run -d -p 8082:80 falconperegrime/nginx-website
+	docker container run -d -p 8082:80 falconperegrine/nginx-website
 
 
 
